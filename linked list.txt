@@ -1,0 +1,387 @@
+import java.util.*;
+
+class node
+{
+  int data;
+  node next;
+    node (int d)
+  {
+	data = d;
+	next = null;
+  }
+}
+
+class linkedlist
+{
+  node head = null;
+  void insertb (int d)
+  {
+	node nnode = new node (d);
+	  nnode.next = head;
+	  head = nnode;
+  }
+
+  void insertl (int d)
+  {
+	node nnode = new node (d);
+	if (head == null)
+	  {
+		head = nnode;
+	  }
+	else
+	  {
+		node temp = head;
+		while (temp.next != null)
+		  {
+			temp = temp.next;
+		  }
+		temp.next = nnode;
+	  }
+  }
+
+  void insertm (int p, int d)
+  {
+	node nnode = new node (d);
+	if (head == null)
+	  {
+		head = nnode;
+	  }
+	else
+	  {
+		if (p < 0)
+		  {
+			System.out.println ("Position cannot be negative");
+			return;
+		  }
+		node temp = head;
+		for (int i = 1; i < p; i++)
+		  {
+			temp = temp.next;
+			if (temp == null)
+			  {
+				System.out.println ("Position doesnot exsit");
+				return;
+			  }
+		  }
+		nnode.next = temp.next;
+		temp.next = nnode;
+	  }
+  }
+
+  void deleteb ()
+  {
+	if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+	else
+	  {
+		int d = head.data;
+		System.out.println ("Deleted data " + d);
+		head = head.next;
+	  }
+  }
+
+  void deletel ()
+  {
+	if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+	else
+	  {
+		node temp = head;
+		node prev = null;
+		while (temp.next != null)
+		  {
+			prev = temp;
+			temp = temp.next;
+		  }
+		System.out.println ("Deleted data " + temp.data);
+		prev.next = null;
+	  }
+  }
+
+
+  void deletem (int p)
+  {
+	if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+	else
+	  {
+		if (p < 0)
+		  {
+			System.out.println ("Position cannot be negative");
+			return;
+		  }
+		node temp = head;
+		node prev = null;
+		for (int i = 0; i < p - 1; i++)
+		  {
+			prev = temp;
+			temp = temp.next;
+			if (temp == null)
+			  {
+				System.out.println ("Position doesnot exsit");
+				return;
+			  }
+		  }
+		System.out.println ("Deleted data " + temp.data);
+		prev.next = temp.next;
+	  }
+  }
+
+  void sum ()
+  {
+	int s = 0;
+	node temp = head;
+	if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+	else
+	  {
+		while (temp != null)
+		  {
+			s = s + temp.data;
+			temp = temp.next;
+		  }
+		System.out.println ("Sum elements in the linkedlist " + s);
+	  }
+  }
+
+  void search (int k)
+  {
+	if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+	else
+	  {
+		node temp = head;
+		while (temp != null)
+		  {
+			if (temp.data == k)
+			  {
+				System.out.println ("Value found");
+				break;
+			  }
+			temp = temp.next;
+		  }
+		if (temp == null)
+		  System.out.println ("Value not found");
+
+	  }
+  }
+
+  void reverse ()
+  {
+	if (head == null)
+	  {
+		System.out.println ("List is empty");
+		return;
+	  }
+	else
+	  {
+		node prev = null;
+		node current = head;
+		node next = null;
+		while (current != null)
+		  {
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		  }
+		head = prev;
+	  }
+  }
+
+  void display ()
+  {
+	node temp = head;
+	if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+	else
+	  {
+
+		while (temp != null)
+		  {
+			System.out.print (temp.data + " ");
+			temp = temp.next;
+		  }
+		System.out.print ("\n");
+	  }
+  }
+
+  void minmax ()
+  {
+	if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+	else
+	  {
+		node temp = head;
+		int min = temp.data;
+		int max = temp.data;
+		while (temp != null)
+		  {
+			if (temp.data < min)
+			  min = temp.data;
+			if (temp.data > max)
+			  max = temp.data;
+
+			temp = temp.next;
+		  }
+		System.out.println ("Min " + min + " max " + max);
+	  }
+  }
+
+  void count ()
+  {
+	if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+	else
+	  {
+		node temp = head;
+		int c = 0;
+		while (temp != null)
+		  {
+			c++;
+			temp = temp.next;
+		  }
+		System.out.println ("Count elements in the list " + c);
+	  }
+  }
+
+  void sort ()
+  {
+   
+    if (head == null)
+	  {
+		System.out.println ("List is Empty");
+		return;
+	  }
+
+	node temp = head;
+	for (node i = temp; i != null; i = i.next)
+	  {
+		node min = i;
+		for (node j = i.next; j != null; j = j.next)
+		  {
+			if (j.data < min.data)
+			  min = j;
+		  }
+		int t = min.data;
+		min.data = i.data;
+		i.data = t;
+	  }
+	
+  }
+
+
+}
+
+public class Main
+{
+  public static void main (String[]args)
+  {
+      int v,p,c;
+      System.out.println("********************************\n*   WELCOME TO THE LINKEDLIST  *\n********************************");
+	linkedlist l1 = new linkedlist ();
+     do{
+         System.out.println("\n\n1.Insertion at begining");
+         System.out.println("2.Insertion at end");
+         System.out.println("3.Insertion at Particular position");
+         System.out.println("4.deletion at begining");
+         System.out.println("5.deletion at End");
+         System.out.println("6.deletion at Particular position");
+         System.out.println("7.Sum of elements");
+         System.out.println("8.Search");
+         System.out.println("9.Reverse");
+         System.out.println("10.Find the minimum and Maximum");
+         System.out.println("11.Countthe number of elements");
+         System.out.println("12.Sorting");
+         System.out.println("13.Display");
+         System.out.println("0.Exit");
+         System.out.println("CHOOSE THE CHOICE\n\n");
+         Scanner s=new Scanner(System.in);
+         c=s.nextInt();
+         switch(c)
+         {
+             case 1:
+                 System.out.println("Enter the value to be inserted");
+                 v=s.nextInt();
+                 l1.insertb(v);
+                 break;
+             case 2:
+                 System.out.println("Enter the value to be inserted");
+                 v=s.nextInt();
+                 l1.insertl(v);
+                 break;
+            case 3:
+                System.out.println("Enter the position and value");
+                 v=s.nextInt();
+                 p=s.nextInt();
+                 l1.insertm(p,v);
+                 break;
+            case 4:
+                 l1.deleteb();
+                 break;
+            case 5:
+                 l1.deletel();
+                 break; 
+            case 6:
+                System.out.println("Enter the position");
+                 p=s.nextInt();
+                 l1.deletem(p);
+                 break; 
+            case 7:
+                l1.sum();
+                break;
+            case 8:
+                System.out.println("Enter the value to search");
+                 v=s.nextInt();
+                l1.search(v);
+                break;
+            case 9:
+                l1.reverse();
+                break;
+            case 10:
+                l1.minmax();
+                break;
+            case 11:
+                l1.count();
+                break;
+            case 12:
+                l1.sort();
+                break;
+            case 13:
+                l1.display();
+                break;
+            case 0:
+                System.out.print("Thank you!");
+                break;
+            default:
+            System.out.println("Enter valid choice");
+         }
+         
+     }while(c!=0);
+
+  }
+}
